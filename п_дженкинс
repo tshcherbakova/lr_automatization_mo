@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('creation') {
+            steps {
+                echo "Running data_creation.py..."
+                python data_creation.py
+                echo "Data created."
+            }
+        }
+        stage('preproc'){
+            steps{
+                echo "Running model_preprocessing.py..."
+                python model_preprocessing.py
+                echo "Preprocessing completed."   
+            }
+        }
+        stage('preparation'){
+            steps{
+                echo "Running model_preparation.py..."
+                python model_preparation.py
+                echo "Model preparation and training completed." 
+            }
+        }
+        stage('testing'){
+            steps{
+                echo "Running model_testing.py..."
+                python model_testing.py
+                echo "Model testing completed."    
+            }
+        }
+    }
+}
